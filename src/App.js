@@ -24,7 +24,7 @@ function App() {
         id={'2'}
         title={'Title 2'} 
         descr={'Discr 2'}
-        colorBg='#ff09' 
+        colorBg='#ff02' 
         />
         <Layout 
         id={'2'}
