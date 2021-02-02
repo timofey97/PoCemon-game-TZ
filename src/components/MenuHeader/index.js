@@ -2,22 +2,23 @@ import React, { useState } from 'react'
 import NavBar from './navBar';
 import Menu from './Menu';
 
-const MenuHeader = () => {
+
+const MenuHeader = ({menu, onSelectMenu}) => {
     const [isActive, setActive] =  useState('');
     
     const MenuHandler = () => {
-        setActive( () => {
-            if (isActive === '') {
-                return '2'
-            } else if (isActive === '2') {
-                return '1'
-            } else { return '2'}
-        })
+        setActive( () => { return isActive === '' ?  '2' : isActive === '2' ? '1' : '2' })
     }
+
+    const onMenuClick = (item) => {
+        setActive('1');
+        onSelectMenu(item);
+    }
+    
     return (
         <>
             <NavBar isActive={isActive} MenuHandler={MenuHandler}/>
-            <Menu isActive={isActive}/>
+            <Menu menu={menu} onMenuClick={onMenuClick} isActive={isActive}/>
         </>
     )
 }

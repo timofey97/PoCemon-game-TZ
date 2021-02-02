@@ -9,19 +9,17 @@ import bg from '../../assets/bg1.jpg';
 import bg2 from '../../assets/bg2.jpg';
 
 import './style.module.css';
-import MenuHeader from '../../components/MenuHeader';
+
 
 function HomePage({onChangePageClick}) {
-    const handlerClickButton = () => {
-        onChangePageClick &&onChangePageClick();
-    }
+
   return (
     <>
-        <MenuHeader/>
+        
         <Header 
             title={'PokemonGame'}
             descr={'This is Description!'}
-            onClickButton={handlerClickButton}
+            onClickButton={() => onChangePageClick('game')}
           />
         <Layout 
             id='rules'

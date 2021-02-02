@@ -146,6 +146,7 @@
 .menuContainer ul li a {
   font-size: 3rem; 
   padding-left: .5rem;
+  cursor: pointer;
 }
 
 .menuContainer ul li a::after {

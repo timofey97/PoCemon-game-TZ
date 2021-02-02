@@ -7,7 +7,7 @@ const GamePage = ({onChangePageClick}) => {
             <h1>This is Game Page!!</h1> 
             <button 
                 className={cn(s.btn, s.btnhome)} 
-                onClick={ () => onChangePageClick && onChangePageClick()}>
+                onClick={ () => onChangePageClick('home')}>
                     Вернуться на гравную страницу
             </button>
         </div>
