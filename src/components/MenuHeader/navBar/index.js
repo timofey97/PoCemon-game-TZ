@@ -1,21 +1,26 @@
 import s from './style.module.css';
 import cn from 'classnames';
+import {useHistory} from 'react-router-dom';
 
 import logo from './assets/1200px-International_Pokémon_logo.svg.png';
 
-const NavBar = ({isActive, MenuHandler}) => {
+const NavBar = ({isActive, handClickHamburg, bgActive = false}) => {
+    const history = useHistory();
     const handlerClick = () => {
-        MenuHandler && MenuHandler();
+        handClickHamburg && handClickHamburg();
     }
     return (
-        <nav id={s.navbar}>
+        <nav id={s.navbar} className={cn({[s.bgActive]: bgActive})}>
         <div className={s.navWrapper}>
-            <p className={s.brand}>
+            <p className={s.brand} onClick={() => (history.push(''))}>
             <img className={s.logo} src={logo} alt="Logo"></img>
             </p>
-            <a className={cn(s.menuButton, {[s.active]: isActive === '2'})} onClick={handlerClick}>
+            <div 
+                className={cn(s.menuButton, {
+                [s.active]: isActive === '2'})} 
+                onClick={handlerClick}>
             <span />
-            </a>
+            </div>
         </div>
         </nav>
     )
