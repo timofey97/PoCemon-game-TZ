@@ -1,24 +1,31 @@
 import React, { useState } from 'react'
-import NavBar from './navBar';
 import Menu from './Menu';
+import NavBar from './navBar';
 
 
-const MenuHeader = ({menu, onSelectMenu}) => {
-    const [isActive, setActive] =  useState('');
+
+const MenuHeader = ({bgActive}) => {
+    const [isActive, setActive] =  useState(null);
     
-    const MenuHandler = () => {
-        setActive( () => { return isActive === '' ?  '2' : isActive === '2' ? '1' : '2' })
+    const handClickHamburg = () => {
+        setActive(prevState => !prevState)
     }
 
-    const onMenuClick = (item) => {
-        setActive('1');
-        onSelectMenu(item);
+    const onMenuClick = () => {
+        setActive(false);
     }
     
     return (
         <>
-            <NavBar isActive={isActive} MenuHandler={MenuHandler}/>
-            <Menu menu={menu} onMenuClick={onMenuClick} isActive={isActive}/>
+            <Menu 
+                isActive={isActive} 
+                onMenuClick={onMenuClick}/>
+
+            <NavBar 
+                isActive={isActive} 
+                handClickHamburg={handClickHamburg} 
+                bgActive={bgActive}/>
+            
         </>
     )
 }

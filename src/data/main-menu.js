@@ -1,21 +1,19 @@
 const MainMenu = [
     {
         title: 'Home',
-        route: 'home'
+        route: ''
     },
     {
-        title: 'Start Game',
+        title: 'Game',
         route: 'game'
     },
     {
-        title: 'Rules',
-        route: 'home',
-        href: 'rules'
+        title: 'About',
+        route: 'about'
     },
     {
-        title: 'About',
-        route: 'home',
-        href: 'about'
+        title: 'Contact',
+        route: 'contact'
     },
 ]
 

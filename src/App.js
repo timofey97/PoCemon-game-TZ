@@ -1,39 +1,42 @@
-import {useState} from 'react';
+import {Redirect, Route, Switch, useRouteMatch} from 'react-router-dom';
+import cn from 'classnames';
 import GamePage from './routes/GamePage';
 import HomePage from './routes/HomePage';
 import MenuHeader from './components/MenuHeader';
-import MainMenu from './data/main-menu';
+import AboutPage from './routes/AboutPage';
+import NotFound from './routes/NotFound';
+import Footer from './components/Footer';
+import s from './style.module.css';
+import ContactPage from './routes/ContactPage';
+
+
 
 const App = () => {
-
-    const [page, setPage] = useState('home');
-    const handleChangePage = (page) => setPage(page);
-    const onChangeMenu = (item) => {
-        setPage(item.route);
-        document.location.href = '#' + (item.href ?? '');
-    }
-
-  let pageContent;
-
-  switch (page) {
-    case 'home':
-    document.title = 'Home | Pokemon Game';  
-    pageContent = <HomePage onChangePageClick = {handleChangePage}/>
-    break;
-    case 'game':
-        document.title = 'Home | Pokemon Game';
-       pageContent = <GamePage onChangePageClick = {handleChangePage}/>;
-              break;
-    default:
-      document.title = 'Page Not Found | Pokemon Game';
-            pageContent = <h1>Page not found</h1>;
-            break;
-  }
-
-  return <>
-        <MenuHeader menu={MainMenu} onSelectMenu={onChangeMenu}/>
-        {pageContent}
-   </>
+  const match = useRouteMatch('/');
+    return (
+          <Switch>
+            <Route path="/404" 
+                    component={NotFound}/>
+            <Route>
+                <>
+                  <MenuHeader bgActive={!match.isExact}/>
+                  <div className={cn(s.wrap, {
+                    [s.isHomePage]: match.isExact})
+                  }>
+                    <Switch>
+                      <Route path="/" exact component={HomePage}/>
+                      <Route path="/game" component={GamePage}/>
+                      <Route path="/about" component={AboutPage}/>
+                      <Route path="/contact" component={ContactPage}/>
+                      <Route render={() => (<Redirect to="/404"/>)}/>
+                    </Switch>
+                  </div>
+                  <Footer/>
+                </>
+            </Route>
+              
+          </Switch>
+    )
 };
 
 export default App;

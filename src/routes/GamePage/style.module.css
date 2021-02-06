@@ -29,3 +29,12 @@
   background: rgb(129, 47, 47);
   box-shadow: 0 3px rgb(129, 47, 47) inset;
 }
+
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
