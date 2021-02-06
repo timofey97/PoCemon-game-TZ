@@ -27,3 +27,4 @@ const NavBar = ({isActive, handClickHamburg, bgActive = false}) => {
 }
 
 export default NavBar;
+
