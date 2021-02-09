@@ -4,6 +4,13 @@
     align-content: center; 
     justify-content: center; 
     overflow: auto;   
+    margin-bottom: 30px ;
+}
+
+.large-card {
+    width: 268px;
+    height: 388px;
+    margin: 5px;
 }
 
 .btnhome {
