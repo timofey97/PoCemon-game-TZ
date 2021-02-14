@@ -16,10 +16,9 @@ const StartPage = () => {
     const [permissNum, setPermissNum] = useState(true);
 
     useEffect(()=> {
-        PokemonsBase.selectedPokemons.length > 5 ?
-            setPermissNum(false)
-            : setPermissNum(true)
-        console.log(PokemonsBase.selectedPokemons);
+        PokemonsBase.selectedPokemons.length === 5 ?
+            setPermissNum(true)
+            : setPermissNum(false)
     },[PokemonsBase.selectedPokemons])
 
     return (
@@ -31,13 +30,8 @@ const StartPage = () => {
             <div className={s.container}>
                 <h1 style={{
                      display: permissNum ? 'none' : ''
-                    }}>You can choose only 5 cards</h1>
-            <button 
-                className={cn(s.btn, s.btnhome)} 
-                onClick={PokemonsBase.AddNewCard}
-                >
-                    Add new Pokemon Card
-            </button>
+                    }}>Choose only 5 pokemons!</h1>
+            
             <button 
             disabled={!permissNum}
                 className={cn(s.btn, s.btnhome)} 
@@ -61,7 +55,8 @@ const StartPage = () => {
                                             minimize = {false}
                                             className={s['large-card']}
                                             isSelected = {isSelected}
-                                            onCardClick = {PokemonsBase.onSetSelected }
+                                            onCardClick = {PokemonsBase.onSetSelected
+                                        } 
                 />)}
             </div>
         </Layout>

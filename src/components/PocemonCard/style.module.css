@@ -24,7 +24,7 @@
 }
 
 .pokemonCard.active {
-    transform: rotateY(0deg);
+    transform: rotateY(0);
 }
 
 .pokemonCard.selected {
@@ -150,6 +150,14 @@
 }
 .normal {
     background-color: var(--normal);
+}
+
+.red {
+    background-color: #f3659e;
+}
+
+.blue {
+    background-color: #64b1f8;
 }
 
 .pokemon .imgContainer {
