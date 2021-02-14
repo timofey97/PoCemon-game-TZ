@@ -40,14 +40,13 @@ const FinishPage = () => {
           {
             pokemonContext.selectedPokemons.map(({name, type, img, id, values}) => (
               <PokemonCard
-                className={s.cardBoard}
+                className={s['large-card']}
                 name = {name}
                 type = {type}
                 img = {img}
                 id = {id}
                 values = {values}
                 isActive
-                minimize
               />
             ))
           }
@@ -63,14 +62,13 @@ const FinishPage = () => {
           {
             pokemonContext.opponentPokemon.map((card) => (
               <PokemonCard
-                className={s.cardBoard}
+                className={s['large-card']}
                 name = {card.name}
                 type = {card.type}
                 img = {card.img}
                 id = {card.id}
                 values = {card.values}
                 isActive
-                minimize
                 onCardClick={async () => {
                 if (pokemonContext.gameResult === 'WIN' && !isPokemonAdded) {
                   await handleAddNewPokemon(card)
