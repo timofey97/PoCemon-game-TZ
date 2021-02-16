@@ -68,7 +68,7 @@ const GamePage = () => {
 
       const handleGameFinished = (result) => {
         setGameResult(result);
-        history.push('/game/finish');
+        history.replace('/game/finish');
     };
     
     return (

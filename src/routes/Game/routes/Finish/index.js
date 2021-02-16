@@ -16,6 +16,7 @@ const FinishPage = () => {
 
     if (!pokemonContext.gameResult) {
         history.replace('/game');
+        console.log('vishel');
     }
 
     const handleClick = () => {
@@ -47,13 +48,14 @@ const FinishPage = () => {
                 id = {id}
                 values = {values}
                 isActive
+                minimize = {false}
               />
             ))
           }
         </div>
         <div>
 
-          <button className={s.button} onClick={handleClick}>
+          <button className={s.button} disabled={!isPokemonAdded} onClick={handleClick}>
           END GAME
         </button>
         </div>
@@ -69,6 +71,7 @@ const FinishPage = () => {
                 id = {card.id}
                 values = {card.values}
                 isActive
+                minimize = {false}
                 onCardClick={async () => {
                 if (pokemonContext.gameResult === 'WIN' && !isPokemonAdded) {
                   await handleAddNewPokemon(card)

@@ -12,3 +12,19 @@
 .card.selected {
     margin-left: -20px;
 }
+
+.visible {
+  display: none;
+}
+
+.container {
+  position: fixed;
+  top: 2vw;
+  z-index: 100;
+}
+
+.img {
+  width: 100px;
+  height: 100px;
+  margin-left: 50px;
+}

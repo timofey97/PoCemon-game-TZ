@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import PockemonCard from "../../../../../components/PocemonCard";
 import s from './style.module.css';
 import cn from 'classnames'
+import Arrow from '../../../../../assets/arrow.png';
 
-const PlayerBoard = ({ cards, onClickCard, player}) => {
+const PlayerBoard = ({ cards, onClickCard, player, disabled}) => {
     const [isSelected, setSelected] = useState(null);
     return (
         <>
-        { 
-            cards.map((item) => 
+         <div className={cn(s.container, { [s.visible]: disabled })}>
+        <img className={s.img} src={Arrow} alt="arrow" />
+        </div>
+            {cards.map((item) => 
                         <div className={cn(s.card, {[s.selected]:isSelected === item.id}
-
                         )}
-                        onClick={() => {setSelected(item.id); onClickCard({player, ...item, })}}
+                        onClick={() => {if (!disabled) {setSelected(item.id); onClickCard({player, ...item })}}}
                         >
                             <PockemonCard 
                                             key={item.id}

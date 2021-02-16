@@ -40,7 +40,7 @@
 
 .playerOne {
     position: absolute;
-    top: 4.3vw;
+    top: 12vw;
     left: 2vw;
     width: 18vw;
     height: 40vw;
@@ -48,7 +48,7 @@
 
 .playerTwo {
     position: absolute;
-    top: 4.3vw;
+    top: 12vw;
     right: 1vw;
     width: 18vw;
     height: 40vw;
