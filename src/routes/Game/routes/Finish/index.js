@@ -12,25 +12,26 @@ const FinishPage = () => {
     const history = useHistory()
     const [isPokemonAdded, setPokemonAdded] = useState(false);
     const firebase = useContext( FireBaseContext );
+    const [selectedCard, setSelectedCard] = useState(null);
 
+    if(pokemonContext.gameResult === 'LOSE') {
+      setPokemonAdded(true);
+    }
 
     if (!pokemonContext.gameResult) {
         history.replace('/game');
         console.log('vishel');
     }
-
-    const handleClick = () => {
+    console.log(selectedCard);
+    const handleClick = async() => {
+        await firebase.addPokemon(selectedCard);
         pokemonContext.clearContext();
         history.push('/game');
     };
 
-    const handleAddNewPokemon = async (card) => {
-        setPokemonAdded(!isPokemonAdded);
-        if (!isPokemonAdded) {
-        await firebase.addPokemon(card);
-        }
-        
-    };
+    // const handleAddNewPokemon = async (card) => {
+    //     setPokemonAdded(!isPokemonAdded);        
+    // };
 
     return (
         <>
@@ -64,17 +65,19 @@ const FinishPage = () => {
           {
             pokemonContext.opponentPokemon.map((card) => (
               <PokemonCard
-                className={s['large-card']}
+                className={s['large-card'] }
                 name = {card.name}
                 type = {card.type}
                 img = {card.img}
                 id = {card.id}
                 values = {card.values}
                 isActive
+                isSelected = {selectedCard && selectedCard.id === card.id}
                 minimize = {false}
-                onCardClick={async () => {
-                if (pokemonContext.gameResult === 'WIN' && !isPokemonAdded) {
-                  await handleAddNewPokemon(card)
+                onCardClick={() => {
+                if (pokemonContext.gameResult === 'WIN') {
+                  setSelectedCard(card);
+                  setPokemonAdded(!isPokemonAdded); 
                 }
             }}
               />

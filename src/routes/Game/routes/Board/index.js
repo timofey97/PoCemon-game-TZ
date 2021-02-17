@@ -130,7 +130,7 @@ const BoardPage = () => {
                     setResultType('draw');
                     setTimeout(() => {
                    SelectedContext.onGameFinished('DRAW');
-                }, 1000);
+                }, 2000);
                 }
                 console.log(resultType)
                 
