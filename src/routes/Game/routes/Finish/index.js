@@ -12,6 +12,7 @@ const FinishPage = () => {
     const history = useHistory()
     const [isPokemonAdded, setPokemonAdded] = useState(false);
     const firebase = useContext( FireBaseContext );
+    const [selectedCard, setSelectedCard] = useState(null);
 
 
     if (!pokemonContext.gameResult) {
@@ -64,16 +65,18 @@ const FinishPage = () => {
           {
             pokemonContext.opponentPokemon.map((card) => (
               <PokemonCard
-                className={s['large-card']}
+                className={s['large-card'] }
                 name = {card.name}
                 type = {card.type}
                 img = {card.img}
                 id = {card.id}
                 values = {card.values}
                 isActive
+                isSelected = {selectedCard && selectedCard.id === card.id}
                 minimize = {false}
                 onCardClick={async () => {
-                if (pokemonContext.gameResult === 'WIN' && !isPokemonAdded) {
+                if (pokemonContext.gameResult === 'WIN') {
+                  setSelectedCard(card);
                   await handleAddNewPokemon(card)
                 }
             }}
