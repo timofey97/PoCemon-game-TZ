@@ -1,0 +1,35 @@
+.container {
+  margin: 0 auto;
+ padding: 100px ;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.playerOne {
+  display: flex;
+  margin: 0 0 40px;
+  justify-content: space-between;
+}
+
+.playerTwo {
+  display: flex;
+  margin: 40px 0 ;
+  justify-content: space-between;
+}
+
+
+.button {
+  color: #fff;
+  background: rgb(212, 75, 56);
+  padding: 0.7em 1.5em;
+  outline: none;
+}
+
+.large-card {
+    width: 268px;
+    height: 388px;
+    margin: 5px;
+}

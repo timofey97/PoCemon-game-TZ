@@ -1,28 +1,45 @@
-import {Switch, Route, useRouteMatch} from 'react-router-dom'
+import {Switch, Route, useRouteMatch, useHistory} from 'react-router-dom'
 import { PokemonContext } from '../../../context/PokemonsContent';
 import BoardPage from './Board';
 import FinishPage from './Finish';
 import StartPage from './Start';
 import { FireBaseContext } from '../../../context/FirebaseContext';
 import { useContext, useState, useEffect } from 'react';
-import POKEMONS from '../../../components/PocemonCard/Cads.json';
 
 const GamePage = () => {
     const match = useRouteMatch();
+    const history = useHistory();
     const firebase = useContext( FireBaseContext );
     const [ selectedPokemons, setSelectedPokemons ] = useState([]);
     const [ pokemons, setPokemons ] = useState({});
+    const [opponentPokemon, setOpponentPokemon] = useState([]);
+    const [gameResult, setGameResult] = useState(null);
 
+    const hendleOpponentPokemon = (pokemons) => {
+        setOpponentPokemon((prevState) => {
+        return [
+            ...prevState,
+            ...pokemons,
+        ]
+        })
+    }
+    console.log(opponentPokemon);
+
+    const hendleClearContext = () => {
+    
+        setOpponentPokemon([]);
+        setGameResult(null);
+        
+    }
 
     useEffect( () => {
+        hendleClearContext();
         firebase.getPokemonSocket( ( pokemons ) => {
             setPokemons( pokemons );
         })
-    }, [] );
 
-    const AddNewCard = () => {
-        firebase.addPokemon(POKEMONS)
-    }
+        return () => firebase.offPokemonSocket();
+    }, [] );
 
     const handleSelectedPokemons = ( id ) => {
         setSelectedPokemons( () => {
@@ -40,7 +57,7 @@ const GamePage = () => {
 
                 if( pokemon.isSelected ) {
                     setSelectedPokemons( prevState => {
-                        return [ ...prevState, [ item[0], pokemon ] ];
+                        return [ ...prevState, pokemon ];
                     })
                 }
 
@@ -48,13 +65,22 @@ const GamePage = () => {
             }, {});
         });
     }
+
+      const handleGameFinished = (result) => {
+        setGameResult(result);
+        history.replace('/game/finish');
+    };
     
     return (
         <PokemonContext.Provider value = {{
             selectedPokemons,
             onSetSelected: handleSelectedPokemons,
             allPokemons: pokemons,
-            AddNewCard
+            opponentPokemon,
+            addOpponentPokemons: hendleOpponentPokemon,
+            clearContext: hendleClearContext,
+            gameResult,
+            onGameFinished: handleGameFinished
         }}>
         <Switch>
             <Route path={`${match.path}/`} exact component={StartPage} />
@@ -66,3 +92,4 @@ const GamePage = () => {
 };
 
 export default GamePage;
+
