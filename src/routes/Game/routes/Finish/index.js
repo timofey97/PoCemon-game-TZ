@@ -14,24 +14,24 @@ const FinishPage = () => {
     const firebase = useContext( FireBaseContext );
     const [selectedCard, setSelectedCard] = useState(null);
 
+    if(pokemonContext.gameResult === 'LOSE') {
+      setPokemonAdded(true);
+    }
 
     if (!pokemonContext.gameResult) {
         history.replace('/game');
         console.log('vishel');
     }
-
-    const handleClick = () => {
+    console.log(selectedCard);
+    const handleClick = async() => {
+        await firebase.addPokemon(selectedCard);
         pokemonContext.clearContext();
         history.push('/game');
     };
 
-    const handleAddNewPokemon = async (card) => {
-        setPokemonAdded(!isPokemonAdded);
-        if (!isPokemonAdded) {
-        await firebase.addPokemon(card);
-        }
-        
-    };
+    // const handleAddNewPokemon = async (card) => {
+    //     setPokemonAdded(!isPokemonAdded);        
+    // };
 
     return (
         <>
@@ -74,10 +74,10 @@ const FinishPage = () => {
                 isActive
                 isSelected = {selectedCard && selectedCard.id === card.id}
                 minimize = {false}
-                onCardClick={async () => {
+                onCardClick={() => {
                 if (pokemonContext.gameResult === 'WIN') {
                   setSelectedCard(card);
-                  await handleAddNewPokemon(card)
+                  setPokemonAdded(!isPokemonAdded); 
                 }
             }}
               />
