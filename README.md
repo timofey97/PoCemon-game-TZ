@@ -1,4 +1,4 @@
-# [Pokemon game React](https://tttatttu.github.io/pokemon-game) \*\*
+# [Pokemon game React](https://zen-torvalds-cd9e9b.netlify.app/) \*\*
 
 \*\* для просмотра проекта, кликните на название
 
