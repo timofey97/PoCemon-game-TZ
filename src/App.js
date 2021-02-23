@@ -9,7 +9,7 @@ import Footer from './components/Footer';
 import s from './style.module.css';
 import ContactPage from './routes/ContactPage';
 import { FireBaseContext } from './context/FirebaseContext';
-import Firebase from './data/firebase';
+import FirebaseClass from './data/firebase';
 
 
 
@@ -18,7 +18,7 @@ const App = () => {
   const location = useLocation('/');
 
     return (
-          <FireBaseContext.Provider value ={new Firebase()}>
+          <FireBaseContext.Provider value ={FirebaseClass}>
             <Switch>
             <Route path="/404" 
                     component={NotFound}/>

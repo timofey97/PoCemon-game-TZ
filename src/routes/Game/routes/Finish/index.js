@@ -56,7 +56,7 @@ const FinishPage = () => {
         </div>
         <div>
 
-          <button className={s.button} disabled={!selectedCard} onClick={handleClick}>
+          <button className={s.button}  onClick={handleClick}>
           END GAME
         </button>
         </div>

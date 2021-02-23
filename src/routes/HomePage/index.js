@@ -6,18 +6,31 @@ import bg from '../../assets/bg1.jpg';
 import bg2 from '../../assets/bg2.jpg';
 
 import './style.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { plusAction, selectCount} from '../../store/counter';
+import { useHistory } from 'react-router-dom';
 
 
 function HomePage() {
+  const history = useHistory();
+  const count = useSelector(selectCount)
+  const dispatch = useDispatch();
+  console.log('count', count)
 
+  const onClickGameBut= () => {
+    // history.push('/game');
+    dispatch(plusAction(1));
+  }
   return (
     <>
         
         <Header 
             title={'PokemonGame'}
             descr={'Lets GO!'}
+            onClickGamePage={onClickGameBut}
             
           />
+       
         <Layout 
             id='rules'
             title='Rules'

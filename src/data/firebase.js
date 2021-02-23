@@ -13,7 +13,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-export default class Firebase {
+class Firebase {
   constructor() {
     if (!firebase.apps.length) {
    firebase.initializeApp({});
@@ -54,3 +54,7 @@ export default class Firebase {
         }).then(()=> cb());
       }
 }
+
+const FirebaseClass = new Firebase();
+
+export default FirebaseClass;
