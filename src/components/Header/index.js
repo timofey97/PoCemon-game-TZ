@@ -1,7 +1,7 @@
 import s from './style.module.css';
 import {useHistory} from 'react-router-dom';
 
-const Header = ({title, descr, }) => {
+const Header = ({title, descr, onClickGamePage}) => {
     const history = useHistory();
     return (
         <header className={s.root}>
@@ -13,7 +13,7 @@ const Header = ({title, descr, }) => {
                 <p>{descr}</p>
                 <button 
                     className={s.btnhome} 
-                    onClick={() => history.push('/game')}>
+                    onClick={()=> onClickGamePage()}>
                     Start Game
                 </button>
             </div>

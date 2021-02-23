@@ -10,6 +10,7 @@ import { PokemonContext } from '../../../../context/PokemonsContent';
 
 
 
+
 const StartPage = () => {
     const history = useHistory();
     const PokemonsBase = useContext(PokemonContext);

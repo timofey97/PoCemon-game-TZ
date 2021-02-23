@@ -3,17 +3,21 @@ import { PokemonContext } from '../../../context/PokemonsContent';
 import BoardPage from './Board';
 import FinishPage from './Finish';
 import StartPage from './Start';
-import { FireBaseContext } from '../../../context/FirebaseContext';
 import { useContext, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPokemonsAsync, selectPokemonsData } from '../../../store/pokemons';
 
 const GamePage = () => {
     const match = useRouteMatch();
     const history = useHistory();
-    const firebase = useContext( FireBaseContext );
+
     const [ selectedPokemons, setSelectedPokemons ] = useState([]);
     const [ pokemons, setPokemons ] = useState({});
     const [opponentPokemon, setOpponentPokemon] = useState([]);
     const [gameResult, setGameResult] = useState(null);
+
+    const pokemonsRedux = useSelector(selectPokemonsData)
+    const dispatch = useDispatch()
 
     const hendleOpponentPokemon = (pokemons) => {
         setOpponentPokemon((prevState) => {
@@ -23,7 +27,6 @@ const GamePage = () => {
         ]
         })
     }
-    console.log(opponentPokemon);
 
     const hendleClearContext = () => {
     
@@ -34,12 +37,12 @@ const GamePage = () => {
 
     useEffect( () => {
         hendleClearContext();
-        firebase.getPokemonSocket( ( pokemons ) => {
-            setPokemons( pokemons );
-        })
-
-        return () => firebase.offPokemonSocket();
+        dispatch(getPokemonsAsync());
     }, [] );
+
+    useEffect(()=> {
+        setPokemons(pokemonsRedux);
+    }, [pokemonsRedux]);
 
     const handleSelectedPokemons = ( id ) => {
         setSelectedPokemons( () => {
