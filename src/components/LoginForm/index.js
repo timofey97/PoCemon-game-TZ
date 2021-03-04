@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import s from './style.module.css';
 import cn from 'classnames';
 
-const LoginForm = ({onSubmit}) => {
+const LoginForm = ({onSubmit, isSignIn, RegistrClick}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -44,9 +44,15 @@ const LoginForm = ({onSubmit}) => {
                     <span className={s.bar}></span>
                     <label className={s.label}>Password</label>
                 </div>
-                <button className={s.btnlogin}>
-                    Login
-                </button>
+                <div className={s.buttoncont}>
+                    <button className={s.btnlogin}>
+                        {isSignIn? 'LOG IN': 'SIGN IN'}
+                    </button>
+                    <p className={s.regLogbtn} onClick={RegistrClick}>
+                        {isSignIn? 'Login?': 'Register?'}
+                    </p>
+                </div>
+                
             </div>
         </form>
     )

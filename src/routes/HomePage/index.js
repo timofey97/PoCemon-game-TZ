@@ -9,6 +9,7 @@ import './style.module.css';
 import { useSelector } from 'react-redux';
 import { selectCount} from '../../store/counter';
 import { useHistory } from 'react-router-dom';
+import NotificationManager from 'react-notifications/lib/NotificationManager';
 
 
 function HomePage() {
@@ -17,7 +18,10 @@ function HomePage() {
   console.log('count', count)
 
   const onClickGameBut= () => {
-     history.push('/game');
+    localStorage.getItem('idToken') 
+        ? history.push('/game')
+        : NotificationManager.error('Please,Sign in');
+     
     // dispatch(plusAction(1));
   }
   return (
