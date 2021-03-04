@@ -175,6 +175,7 @@
   outline: none;
 } 
 .btnhome:hover { background: rgb(129, 47, 47); }
+
 .btnhome:active {
     outline: none;
   background: rgb(129, 47, 47);

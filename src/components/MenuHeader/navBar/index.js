@@ -3,8 +3,9 @@ import cn from 'classnames';
 import {useHistory} from 'react-router-dom';
 
 import logo from './assets/1200px-International_Pokémon_logo.svg.png';
+import {ReactComponent as LoginSVG} from './assets/login.svg';
 
-const NavBar = ({isActive, handClickHamburg, bgActive = false}) => {
+const NavBar = ({isActive, handClickHamburg, bgActive = false,onClickLogin}) => {
     const history = useHistory();
     const handlerClick = () => {
         handClickHamburg && handClickHamburg();
@@ -15,11 +16,17 @@ const NavBar = ({isActive, handClickHamburg, bgActive = false}) => {
             <p className={s.brand} onClick={() => (history.push(''))}>
             <img className={s.logo} src={logo} alt="Logo"></img>
             </p>
-            <div 
+            <div className={s.logoAndMenu}>
+                <div className={s.loginWrap}
+                    onClick={onClickLogin}>
+                    <LoginSVG/>
+                </div>
+                <div 
                 className={cn(s.menuButton, {
                 [s.active]: isActive === '2'})} 
                 onClick={handlerClick}>
-            <span />
+                <span />
+            </div>
             </div>
         </div>
         </nav>
