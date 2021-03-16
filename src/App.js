@@ -15,12 +15,26 @@ import ContactPage from './routes/ContactPage';
 import { FireBaseContext } from './context/FirebaseContext';
 import FirebaseClass from './data/firebase';
 import 'react-notifications/lib/notifications.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getUserAsync, selectUserLoading } from './store/user';
+import UserPage from './routes/UserPage';
 
 
 
 const App = () => {
+  const isUserLoading = useSelector(selectUserLoading);
   const match = useRouteMatch('/');
   const location = useLocation('/');
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUserAsync());
+  }, [])
+
+  if (isUserLoading) {
+    return 'loading...'
+  }
 
     return (
           <FireBaseContext.Provider value ={FirebaseClass}>
@@ -38,6 +52,7 @@ const App = () => {
                       <PrivateRoute path="/game" component={GamePage}/>
                       <PrivateRoute path="/about" component={AboutPage}/>
                       <Route path="/contact" component={ContactPage}/>
+                      <Route path="/user" component={UserPage}/>
                       <Route render={() => (<Redirect to="/404"/>)}/>
                     </Switch>
                   </div>

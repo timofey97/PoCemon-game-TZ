@@ -4,6 +4,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     height: 1000px;
+    width: 100%;
     background-position: center;
     position: relative;
     margin: 0 auto ;
@@ -15,8 +16,8 @@
     position: absolute;
     width: 44vw;
     height: 44vw;
-    top: 4.3vw;
-    left: 24vw;
+    top: 3vw;
+    left: 27vw;
 }
 
 .boardPlate {
@@ -27,7 +28,7 @@
     cursor: pointer;
 }
 .boardPlate:hover {
-    background: rgba(255,255,255, .1);
+    background: rgba(184, 95, 95, 0.377);
 }
 .boardPlate.disabled:hover {
     background: none;

@@ -6,23 +6,18 @@ import bg from '../../assets/bg1.jpg';
 import bg2 from '../../assets/bg2.jpg';
 
 import './style.module.css';
-import { useSelector } from 'react-redux';
-import { selectCount} from '../../store/counter';
 import { useHistory } from 'react-router-dom';
 import NotificationManager from 'react-notifications/lib/NotificationManager';
 
 
 function HomePage() {
   const history = useHistory();
-  const count = useSelector(selectCount)
-  console.log('count', count)
+
 
   const onClickGameBut= () => {
     localStorage.getItem('idToken') 
         ? history.push('/game')
-        : NotificationManager.error('Please,Sign in');
-     
-    // dispatch(plusAction(1));
+        : NotificationManager.error('Please,Sign in or Log In');
   }
   return (
     <>

@@ -29,7 +29,6 @@ const GamePage = () => {
     }
 
     const hendleClearContext = () => {
-    
         setOpponentPokemon([]);
         setGameResult(null);
         
@@ -38,6 +37,7 @@ const GamePage = () => {
     useEffect( () => {
         hendleClearContext();
         dispatch(getPokemonsAsync());
+
     }, [] );
 
     useEffect(()=> {
@@ -63,7 +63,6 @@ const GamePage = () => {
                         return [ ...prevState, pokemon ];
                     })
                 }
-
                 return acc;
             }, {});
         });

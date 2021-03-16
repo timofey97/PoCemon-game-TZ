@@ -4,6 +4,8 @@ import {useHistory} from 'react-router-dom';
 import {PokemonContext} from '../../../../context/PokemonsContent';
 import PokemonCard from '../../../../components/PocemonCard';
 import { FireBaseContext } from '../../../../context/FirebaseContext';
+import { selectLocalID } from '../../../../store/user';
+import { useSelector } from 'react-redux';
 
   
 
@@ -11,8 +13,8 @@ const FinishPage = () => {
     const pokemonContext = useContext(PokemonContext);
     const history = useHistory()
     const [isPokemonAdded, setPokemonAdded] = useState(false);
-    const firebase = useContext( FireBaseContext );
     const [selectedCard, setSelectedCard] = useState(null);
+    const localId = useSelector(selectLocalID);
 
     if(pokemonContext.gameResult === 'LOSE') {
       setPokemonAdded(true);
@@ -20,11 +22,14 @@ const FinishPage = () => {
 
     if (!pokemonContext.gameResult) {
         history.replace('/game');
-        console.log('vishel');
     }
     console.log(selectedCard);
     const handleClick = async() => {
-        await firebase.addPokemon(selectedCard);
+          const idToken = localStorage.getItem('idToken');
+         await fetch(`https://pokemongame-367d1-default-rtdb.firebaseio.com/${localId}/pokemons.json?auth=${idToken}`, {
+                        method: 'POST',
+                        body: JSON.stringify(selectedCard)
+                })
         pokemonContext.clearContext();
         history.push('/game');
     };
@@ -42,6 +47,7 @@ const FinishPage = () => {
           {
             pokemonContext.selectedPokemons.map(({name, type, img, id, values}) => (
               <PokemonCard
+              key={id}
                 className={s['large-card']}
                 name = {name}
                 type = {type}
@@ -65,6 +71,7 @@ const FinishPage = () => {
           {
             pokemonContext.opponentPokemon.map((card) => (
               <PokemonCard
+              key={card.id}
                 className={s['large-card'] }
                 name = {card.name}
                 type = {card.type}

@@ -120,12 +120,12 @@ const BoardPage = () => {
                     setResultType('win');
                     setTimeout(() => {
                    SelectedContext.onGameFinished('WIN');
-                }, 1000);
+                }, 2000);
                 } else if (count1 < count2) {
                     setResultType('lose');
                     setTimeout(() => {
                    SelectedContext.onGameFinished('LOSE');
-                }, 1000);
+                }, 2000);
                 } else {
                     setResultType('draw');
                     setTimeout(() => {
@@ -135,6 +135,7 @@ const BoardPage = () => {
                 console.log(resultType)
                 
                 }
+           
             }, [steps]);
 
 
