@@ -3,7 +3,7 @@ import { PokemonContext } from '../../../context/PokemonsContent';
 import BoardPage from './Board';
 import FinishPage from './Finish';
 import StartPage from './Start';
-import { useContext, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPokemonsAsync, selectPokemonsData } from '../../../store/pokemons';
 
@@ -29,7 +29,6 @@ const GamePage = () => {
     }
 
     const hendleClearContext = () => {
-    
         setOpponentPokemon([]);
         setGameResult(null);
         
@@ -38,6 +37,7 @@ const GamePage = () => {
     useEffect( () => {
         hendleClearContext();
         dispatch(getPokemonsAsync());
+
     }, [] );
 
     useEffect(()=> {
@@ -63,7 +63,6 @@ const GamePage = () => {
                         return [ ...prevState, pokemon ];
                     })
                 }
-
                 return acc;
             }, {});
         });

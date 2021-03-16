@@ -1,8 +1,6 @@
 import s from './style.module.css';
-import {useHistory} from 'react-router-dom';
 
 const Header = ({title, descr, onClickGamePage}) => {
-    const history = useHistory();
     return (
         <header className={s.root}>
             <div className={s.forest}></div>
